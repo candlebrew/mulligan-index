@@ -104,9 +104,9 @@ async def character(ctx, name: str):
     embed.add_field(name="Date of Creation", value=creationDate, inline=True)
     embed.add_field(name="Tribe", value=tribe, inline=True)
     embed.add_field(name="Rank", value=rank, inline=True)
-    embed.add_field(name="Appearance", value=appearance)
-    embed.add_field(name="Personality", value=personality)
-    embed.add_field(name="Character Sheet Url", value=sheetURL)
+    embed.add_field(name="Appearance", value=appearance, inline=False)
+    embed.add_field(name="Personality", value=personality, inline=False)
+    embed.add_field(name="Character Sheet Url", value=sheetURL, inline=False)
 
     await ctx.send(embed=embed)
     
