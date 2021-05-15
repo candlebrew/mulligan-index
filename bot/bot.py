@@ -136,8 +136,11 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
             if characterUser != user:
                 await ctx.send("That character does not belong to you.")
             else:
+                inputLength = len(newValue)
                 if (newValue == None) and (setType == "nickname"):
                     await ctx.send("You must set what the new value is.")
+                elif (inputLength > 1024):
+                    await ctx.send("Your new value must be 1024 characters or fewer.")
                 else:
                     sqlText = "UPDATE characters SET " + setType + " = $1 WHERE nickname = $2;"
                     await db.execute(sqlText,newValue,nickname)
