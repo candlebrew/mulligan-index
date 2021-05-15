@@ -13,6 +13,7 @@ db = None
 
 charProfilesSQL = '''
     CREATE TABLE IF NOT EXISTS characters (
+        id SERIAL,
         nickname TEXT,
         fullname TEXT,
         pronouns TEXT,
@@ -39,10 +40,16 @@ async def run():
 ## Bot Setup ----------------------------------------------------------
     
 token = os.environ.get('DISCORD_BOT_TOKEN')
+devID = int(os.environ.get('DEV_ID'))
 
 client = discord.Client()
 
 bot = commands.Bot(command_prefix='mi!', db=db)
+
+def is_dev():
+    def predicate(ctx):
+        return ctx.message.author.id == devID
+    return commands.check(predicate)
 
 ## Code Here ----------------------------------------------------------
 
@@ -129,9 +136,26 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
             if characterUser != user:
                 await ctx.send("That character does not belong to you.")
             else:
-                sqlText = "UPDATE characters SET " + setType + " = $1 WHERE nickname = $2;"
-                await db.execute(sqlText,newValue,nickname)
-                await ctx.send("Character " + nickname + " has been updated.")
+                if (newValue == None) and (setType == "nickname"):
+                    await ctx.send("You must set what the new value is.")
+                else:
+                    sqlText = "UPDATE characters SET " + setType + " = $1 WHERE nickname = $2;"
+                    await db.execute(sqlText,newValue,nickname)
+                    await ctx.send("Character " + nickname + " has been updated.")
+                
+@bot.group()
+async def dev(ctx):
+    pass
+
+@dev.group()
+async def delete(ctx):
+    pass
+
+@delete.command()
+@is_dev()
+async def character(ctx, id: int):
+    await db.execute("DELETE FROM characters WHERE id = $1;",id)
+    await ctx.send("Deletion completed.")
     
 
 ## Bot Setup & Activation ----------------------------------------------------------
