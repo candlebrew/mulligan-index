@@ -55,60 +55,64 @@ def is_dev():
 
 @bot.group(invoke_without_command=True)
 async def character(ctx, name: str):
-    embed = discord.Embed(colour=8163583)
-    
-    fullName = await db.fetchval("SELECT fullname FROM characters WHERE nickname = $1;",name)
-    if fullName is None:
-        fullName = name
-    fullName += "\u200B\u200B"
-    pronouns = await db.fetchval("SELECT pronouns FROM characters WHERE nickname = $1;",name)
-    if pronouns is None:
-        pronouns = "-"
-    pronouns += "\u200B\u200B"
-    creationAge = await db.fetchval("SELECT age FROM characters WHERE nickname = $1;",name)
-    if creationAge is None:
-        creationAge = "-"
-    creationAge += "\u200B\u200B"
-    creationDate = await db.fetchval("SELECT date FROM characters WHERE nickname = $1;",name)
-    if creationDate is None:
-        creationDate = "-"
-    creationDate += "\u200B\u200B"
-    tribe = await db.fetchval("SELECT tribe FROM characters WHERE nickname = $1;",name)
-    if tribe is None:
-        tribe = "-"
-    tribe += "\u200B\u200B"
-    rank = await db.fetchval("SELECT rank FROM characters WHERE nickname = $1;",name)
-    if rank is None:
-        rank = "-"
-    rank += "\u200B\u200B"
-    appearance = await db.fetchval("SELECT appearance FROM characters WHERE nickname = $1;",name)
-    if appearance is None:
-        appearance = "-"
-    personality = await db.fetchval("SELECT personality FROM characters WHERE nickname = $1;",name)
-    if personality is None:
-        personality = "-"
-    sheetURL =  await db.fetchval("SELECT sheet FROM characters WHERE nickname = $1;",name)
-    if sheetURL is None:
-        sheetURL = "-"
-    image = await db.fetchval("SELECT image FROM characters WHERE nickname = $1;",name)
-    ownerID = await db.fetchval("SELECT owner_uid FROM characters WHERE nickname = $1;",name)
+    nameCheck = await db.fetchval("SELECT nickname FROM characters WHERE nickname = $1;",nickname)
+    if nameCheck is None:
+        await ctx.send("I couldn't find a character with the nickname '" + nickname + "'")
+    else:
+        embed = discord.Embed(colour=8163583)
 
-    if image != None:
-        embed.set_image(url=image)
-    
-    embed.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
+        fullName = await db.fetchval("SELECT fullname FROM characters WHERE nickname = $1;",name)
+        if fullName is None:
+            fullName = name
+        fullName += "\u200B\u200B"
+        pronouns = await db.fetchval("SELECT pronouns FROM characters WHERE nickname = $1;",name)
+        if pronouns is None:
+            pronouns = "-"
+        pronouns += "\u200B\u200B"
+        creationAge = await db.fetchval("SELECT age FROM characters WHERE nickname = $1;",name)
+        if creationAge is None:
+            creationAge = "-"
+        creationAge += "\u200B\u200B"
+        creationDate = await db.fetchval("SELECT date FROM characters WHERE nickname = $1;",name)
+        if creationDate is None:
+            creationDate = "-"
+        creationDate += "\u200B\u200B"
+        tribe = await db.fetchval("SELECT tribe FROM characters WHERE nickname = $1;",name)
+        if tribe is None:
+            tribe = "-"
+        tribe += "\u200B\u200B"
+        rank = await db.fetchval("SELECT rank FROM characters WHERE nickname = $1;",name)
+        if rank is None:
+            rank = "-"
+        rank += "\u200B\u200B"
+        appearance = await db.fetchval("SELECT appearance FROM characters WHERE nickname = $1;",name)
+        if appearance is None:
+            appearance = "-"
+        personality = await db.fetchval("SELECT personality FROM characters WHERE nickname = $1;",name)
+        if personality is None:
+            personality = "-"
+        sheetURL =  await db.fetchval("SELECT sheet FROM characters WHERE nickname = $1;",name)
+        if sheetURL is None:
+            sheetURL = "-"
+        image = await db.fetchval("SELECT image FROM characters WHERE nickname = $1;",name)
+        ownerID = await db.fetchval("SELECT owner_uid FROM characters WHERE nickname = $1;",name)
 
-    embed.add_field(name="Full Name", value=fullName, inline=True)
-    embed.add_field(name="Pronouns", value=pronouns, inline=True)
-    embed.add_field(name="Age on Creation", value=creationAge, inline=True)
-    embed.add_field(name="Tribe", value=tribe, inline=True)
-    embed.add_field(name="Rank", value=rank, inline=True)
-    embed.add_field(name="Date of Creation", value=creationDate, inline=True)
-    embed.add_field(name="Appearance", value=appearance, inline=False)
-    embed.add_field(name="Personality", value=personality, inline=False)
-    embed.add_field(name="Character Sheet Url", value=sheetURL, inline=False)
+        if image != None:
+            embed.set_image(url=image)
 
-    await ctx.send(embed=embed)
+        embed.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
+
+        embed.add_field(name="Full Name", value=fullName, inline=True)
+        embed.add_field(name="Pronouns", value=pronouns, inline=True)
+        embed.add_field(name="Age on Creation", value=creationAge, inline=True)
+        embed.add_field(name="Tribe", value=tribe, inline=True)
+        embed.add_field(name="Rank", value=rank, inline=True)
+        embed.add_field(name="Date of Creation", value=creationDate, inline=True)
+        embed.add_field(name="Appearance", value=appearance, inline=False)
+        embed.add_field(name="Personality", value=personality, inline=False)
+        embed.add_field(name="Character Sheet Url", value=sheetURL, inline=False)
+
+        await ctx.send(embed=embed)
     
 @character.command()
 async def new(ctx, nickname: str, *, fullName: typing.Optional[str]):
