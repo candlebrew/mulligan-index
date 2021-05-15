@@ -60,27 +60,27 @@ async def character(ctx, name: str):
     fullName = await db.fetchval("SELECT fullname FROM characters WHERE nickname = $1;",name)
     if fullName is None:
         fullName = name
-    fullName += "\n"
+    fullName += "\u200B"
     pronouns = await db.fetchval("SELECT pronouns FROM characters WHERE nickname = $1;",name)
     if pronouns is None:
         pronouns = "-"
-    pronouns += "\n"
+    pronouns += "\u200B"
     creationAge = await db.fetchval("SELECT age FROM characters WHERE nickname = $1;",name)
     if creationAge is None:
         creationAge = "-"
-    creationAge += "\n"
+    creationAge += "\u200B"
     creationDate = await db.fetchval("SELECT date FROM characters WHERE nickname = $1;",name)
     if creationDate is None:
         creationDate = "-"
-    creationDate += "\n"
+    creationDate += "\u200B"
     tribe = await db.fetchval("SELECT tribe FROM characters WHERE nickname = $1;",name)
     if tribe is None:
         tribe = "-"
-    tribe += "\n"
+    tribe += "\u200B"
     rank = await db.fetchval("SELECT rank FROM characters WHERE nickname = $1;",name)
     if rank is None:
         rank = "-"
-    rank += "\n"
+    rank += "\u200B"
     appearance = await db.fetchval("SELECT appearance FROM characters WHERE nickname = $1;",name)
     if appearance is None:
         appearance = "-"
@@ -101,9 +101,9 @@ async def character(ctx, name: str):
     embed.add_field(name="Full Name", value=fullName, inline=True)
     embed.add_field(name="Pronouns", value=pronouns, inline=True)
     embed.add_field(name="Age on Creation", value=creationAge, inline=True)
-    embed.add_field(name="Date of Creation", value=creationDate, inline=True)
     embed.add_field(name="Tribe", value=tribe, inline=True)
     embed.add_field(name="Rank", value=rank, inline=True)
+    embed.add_field(name="Date of Creation", value=creationDate, inline=True)
     embed.add_field(name="Appearance", value=appearance, inline=False)
     embed.add_field(name="Personality", value=personality, inline=False)
     embed.add_field(name="Character Sheet Url", value=sheetURL, inline=False)
