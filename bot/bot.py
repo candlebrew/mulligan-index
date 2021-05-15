@@ -99,6 +99,7 @@ async def character(ctx, name: str):
     embed.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
 
     embed.add_field(name="Full Name", value=fullName, inline=True)
+    embed.add_field(name="", value="", inline=True)
     embed.add_field(name="Pronouns", value=pronouns, inline=True)
     embed.add_field(name="Age on Creation", value=creationAge, inline=True)
     embed.add_field(name="Tribe", value=tribe, inline=True)
