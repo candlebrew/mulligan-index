@@ -60,27 +60,27 @@ async def character(ctx, name: str):
     fullName = await db.fetchval("SELECT fullname FROM characters WHERE nickname = $1;",name)
     if fullName is None:
         fullName = name
-    fullName += "\u200B"
+    fullName += "\u200B\u200B"
     pronouns = await db.fetchval("SELECT pronouns FROM characters WHERE nickname = $1;",name)
     if pronouns is None:
         pronouns = "-"
-    pronouns += "\u200B"
+    pronouns += "\u200B\u200B"
     creationAge = await db.fetchval("SELECT age FROM characters WHERE nickname = $1;",name)
     if creationAge is None:
         creationAge = "-"
-    creationAge += "\u200B"
+    creationAge += "\u200B\u200B"
     creationDate = await db.fetchval("SELECT date FROM characters WHERE nickname = $1;",name)
     if creationDate is None:
         creationDate = "-"
-    creationDate += "\u200B"
+    creationDate += "\u200B\u200B"
     tribe = await db.fetchval("SELECT tribe FROM characters WHERE nickname = $1;",name)
     if tribe is None:
         tribe = "-"
-    tribe += "\u200B"
+    tribe += "\u200B\u200B"
     rank = await db.fetchval("SELECT rank FROM characters WHERE nickname = $1;",name)
     if rank is None:
         rank = "-"
-    rank += "\u200B"
+    rank += "\u200B\u200B"
     appearance = await db.fetchval("SELECT appearance FROM characters WHERE nickname = $1;",name)
     if appearance is None:
         appearance = "-"
