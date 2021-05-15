@@ -9,6 +9,8 @@ import datetime
 
 db = None
 
+# https://discord.com/api/oauth2/authorize?client_id=843224909958479933&permissions=268823632&scope=bot
+
 charProfilesSQL = '''
     CREATE TABLE IF NOT EXISTS characters (
         nickname TEXT,
