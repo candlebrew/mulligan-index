@@ -55,7 +55,7 @@ def is_dev():
 
 @bot.group(invoke_without_command=True)
 async def character(ctx, name: str):
-    embed = discord.Embed(colour=discord.Colour(0xa6c6e4))
+    embed = discord.Embed(colour=8163583)
     
     fullName = await db.fetchval("SELECT fullname FROM characters WHERE nickname = $1;",name)
     if fullName is None:
