@@ -55,7 +55,7 @@ def is_dev():
 
 @bot.group(invoke_without_command=True)
 async def character(ctx, name: str):
-    nameCheck = await db.fetchval("SELECT nickname FROM characters WHERE name = $1;",name)
+    nameCheck = await db.fetchval("SELECT nickname FROM characters WHERE nickname = $1;",name)
     if nameCheck is None:
         await ctx.send("I couldn't find a character with the nickname '" + name + "'")
     else:
