@@ -347,7 +347,7 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
                     await ctx.send("Your new value must be 1024 characters or fewer.")
                 else:
                     if setType in ["constitution","lithe","fortitude"]:
-                        newValue = modDict[newValue]
+                        newValue = modDict[int(newValue)]
                         if setType == "constitution":
                             setType = "conMod"
                         elif setType == "lithe":
