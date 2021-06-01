@@ -78,4 +78,28 @@ sheetProfilesSQL = '''
 
     ALTER TABLE characters ADD COLUMN IF NOT EXISTS trait TEXT;
 
-    ALTER TABLE characters ADD COLUMN IF NOT EXISTS inventory TEXT;'''
+    ALTER TABLE characters ADD COLUMN IF NOT EXISTS inventory TEXT;
+    
+    ALTER TABLE characters ADD COLUMN IF NOT EXISTS note1 TEXT;
+        
+    ALTER TABLE characters ADD COLUMN IF NOT EXISTS note2 TEXT;
+
+    ALTER TABLE characters ADD COLUMN IF NOT EXISTS note3 TEXT;
+
+    ALTER TABLE characters ADD COLUMN IF NOT EXISTS note4 TEXT;
+    
+    ALTER TABLE characters ADD COLUMN IF NOT EXISTS note1name TEXT;
+        
+    ALTER TABLE characters ADD COLUMN IF NOT EXISTS note2name TEXT;
+
+    ALTER TABLE characters ADD COLUMN IF NOT EXISTS note3name TEXT;
+
+    ALTER TABLE characters ADD COLUMN IF NOT EXISTS note4name TEXT;
+        
+    ALTER TABLE characters ADD COLUMN IF NOT EXISTS quote TEXT;
+
+    ALTER TABLE characters ADD COLUMN IF NOT EXISTS backstory TEXT;
+
+    ALTER TABLE characters ADD COLUMN IF NOT EXISTS emoji TEXT;
+
+    ALTER TABLE characters ADD COLUMN IF NOT EXISTS color BIGINT;'''
