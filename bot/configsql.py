@@ -17,8 +17,10 @@ charProfilesSQL = '''
     
     sheetProfilesSQL = '''
         ALTER TABLE characters ADD COLUMN IF NOT EXISTS physical INT;
+        ALTER TABLE characters ADD COLUMN IF NOT EXISTS maxphysical INT;
         
         ALTER TABLE characters ADD COLUMN IF NOT EXISTS mental INT;
+        ALTER TABLE characters ADD COLUMN IF NOT EXISTS maxmental INT;
         
         ALTER TABLE characters ADD COLUMN IF NOT EXISTS defense INT;
         
