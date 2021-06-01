@@ -304,12 +304,9 @@ async def sheet(ctx, name: str):
         embed1.add_field(name="Fortitude: "+fortitude+"("+fortMod+")", value="Brute Attack:"+brute+"\nUse Force: "+force+"\nSwimming: "+swimming+"\nDigging: "+digging, inline=True)
         embed1.add_field(name="Lithe: "+lithe+"("+litheMod+")", value="Careful Attack:"+careful+"\nContortion: "+contortion+"\nLeaping: "+leaping+"\nThrowing: "+throwing, inline=True)
         embed1.add_field(name="Constitution: "+constitution+"("+conMod+")", value="Physical Recoup:"+precoup+"\nMental Recoup: "+mrecoup+"\nDiet: "+diet+"\nEExposure: "+exposure+"\nImmunity: "+immunity, inline=True)
-        embed1.add_field(name="Empathy: ("+empathy+")", value="", inline=True)
-        embed1.add_field(name="Charisma: ("+charisma+")", value="", inline=True)
-        embed1.add_field(name="Memory: ("+memory+")", value="", inline=True)
-        embed1.add_field(name="Reasoning: ("+reasoning+")", value="", inline=True)
-        embed1.add_field(name="Perform: ("+perform+")", value="", inline=True)
-        embed1.add_field(name="Self: ("+Self+")", value="", inline=True)
+        embed1.add_field(name="Empathy: ("+empathy+")", value="\n**Reasoning: ("+reasoning+")**", inline=True)
+        embed1.add_field(name="Charisma: ("+charisma+")", value="**Perform: ("+perform+")**", inline=True)
+        embed1.add_field(name="Memory: ("+memory+")", value="**Self: ("+Self+")**", inline=True)
         
         embed1.add_field(name="Unique Trait", value=trait, inline=False)
         
