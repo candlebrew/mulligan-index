@@ -75,6 +75,7 @@ def is_admin():
 ## Code Here ----------------------------------------------------------
 @bot.group(invoke_without_command=True,aliases=["char"])
 async def character(ctx, name: str):
+    emoji = ""
     embed1 = discord.Embed(colour=0)
     embed2 = discord.Embed(colour=0)
 
