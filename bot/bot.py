@@ -223,7 +223,13 @@ async def sheet(ctx, name: str):
         embed1 = discord.Embed(colour=8163583,title="Character Sheet: "+fullName)
         embed2 = discord.Embed(colour=8163583,title="Character Sheet: "+fullName)
         
+        counter = 0
+        
         for stat in [physical, mental, maxPhysical, maxMental, defense, confidence, fortitude, fortMod, brute, force, swimming, digging, lithe, litheMod, careful, contortion, leaping, throwing, constitution, conMod, precoup, mrecoup, diet, exposure, immunity, empathy, charisma, memory, reasoning, perform, Self, trait, inventory]:
+            await ctx.send("stat")
+            counter += 1
+            if counter >= 5:
+               break
             if stat is None:
                 stat = "-"
             stat = str(stat)
