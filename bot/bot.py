@@ -234,7 +234,7 @@ async def sheet(ctx, name: str):
         embed1.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
         embed2.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
 
-        embed1.add_field(name="Vitality", value="Physical: "+physical+"/"+maxPhysical+"\nMental: "+mental+"/"maxMental, inline=True)
+        embed1.add_field(name="Vitality", value="Physical: "+physical+"/"+maxPhysical+"\nMental: "+mental+"/"+maxMental, inline=True)
         embed1.add_field(name="Defense", value=defense, inline=True)
         embed1.add_field(name="Confidence", value=confidence, inline=True)
         embed1.add_field(name="Fortitude: "+fortitude+"("+fortMod+")", value="Brute Attack:"+brute+"\nUse Force: "+force+"\nSwimming: "+swimming+"\nDigging: "+digging, inline=True)
