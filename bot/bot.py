@@ -6,27 +6,40 @@ import os
 import asyncio
 import asyncpg
 import datetime
+import DiscordUtils
+
+import configsql
 
 db = None
 
-# https://discord.com/api/oauth2/authorize?client_id=843224909958479933&permissions=268823632&scope=bot
+modDict = {
+    1: -5,
+    2: -4,
+    3: -4,
+    4: -3,
+    5: -3,
+    6: -2,
+    7: -2,
+    8: -1,
+    9: -1,
+    10: 0,
+    11: 0,
+    12: 1,
+    13: 1,
+    14: 2,
+    15: 2,
+    16: 3,
+    17: 3,
+    18: 4,
+    19: 4,
+    20: 5,
+    21: 5,
+    22: 6,
+    23: 6,
+    24: 7,
+    25: 7}
 
-charProfilesSQL = '''
-    CREATE TABLE IF NOT EXISTS characters (
-        id SERIAL,
-        nickname TEXT,
-        fullname TEXT,
-        pronouns TEXT,
-        age TEXT,
-        date TEXT,
-        tribe TEXT,
-        rank TEXT,
-        appearance TEXT,
-        personality TEXT,
-        sheet TEXT,
-        image TEXT,
-        owner_uid BIGINT
-    );'''
+# https://discord.com/api/oauth2/authorize?client_id=843224909958479933&permissions=268823632&scope=bot
 
 ## Connecting the DB ----------------------------------------------------------
 async def run():
@@ -41,6 +54,8 @@ async def run():
     
 token = os.environ.get('DISCORD_BOT_TOKEN')
 devID = int(os.environ.get('DEV_ID'))
+adminID = int(os.environ.get('ADMIN_ID'))
+devEmail = os.environ.get('DEV_EMAIL')
 
 client = discord.Client()
 
@@ -50,10 +65,15 @@ def is_dev():
     def predicate(ctx):
         return ctx.message.author.id == devID
     return commands.check(predicate)
+    
+def is_admin():
+    def predicate(ctx):
+        return ctx.message.author.id == adminID
+    return commands.check(predicate)
 
 ## Code Here ----------------------------------------------------------
 
-@bot.group(invoke_without_command=True)
+@bot.group(invoke_without_command=True,aliases=["char"])
 async def character(ctx, name: str):
     nameCheck = await db.fetchval("SELECT nickname FROM characters WHERE nickname = $1;",name)
     if nameCheck is None:
@@ -137,10 +157,13 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
         else:
             characterUser = await db.fetchval("SELECT owner_uid FROM characters WHERE nickname = $1;",nickname)
             user = ctx.message.author.id
-            if characterUser != user:
+            if (characterUser != user) or (user != adminID):
                 await ctx.send("That character does not belong to you.")
             else:
-                inputLength = len(newValue)
+                if newValue is not None:
+                    inputLength = len(newValue)
+                else:
+                    inputLength = 0
                 if (newValue == None) and (setType == "nickname"):
                     await ctx.send("You must set what the new value is.")
                 elif (inputLength > 1024):
@@ -149,7 +172,134 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
                     sqlText = "UPDATE characters SET " + setType + " = $1 WHERE nickname = $2;"
                     await db.execute(sqlText,newValue,nickname)
                     await ctx.send("Character " + nickname + " has been updated.")
+
+
+@bot.group(invoke_without_command=True)
+async def sheet(ctx, name: str):
+    nameCheck = await db.fetchval("SELECT nickname FROM characters WHERE nickname = $1;",name)
+    if nameCheck is None:
+        await ctx.send("I couldn't find a character with the nickname '" + name + "'")
+    else:
+        fullName = await db.fetchval("SELECT fullname FROM characters WHERE nickname = $1;",name)
+        if fullName is None:
+            fullName = name
+        physical = await db.fetchval("SELECT physical FROM characters WHERE nickname = $1;",name)
+        maxPhysical = await db.fetchval("SELECT maxphysical FROM characters WHERE nickname = $1;",name)
+        mental = await db.fetchval("SELECT mental FROM characters WHERE nickname = $1;",name)
+        maxMental = await db.fetchval("SELECT maxmental FROM characters WHERE nickname = $1;",name)
+        defense = await db.fetchval("SELECT defense FROM characters WHERE nickname = $1;",name)
+        confidence = await db.fetchval("SELECT confidence FROM characters WHERE nickname = $1;",name)
+        fortitude = await db.fetchval("SELECT fortitude FROM characters WHERE nickname = $1;",name)
+        fortMod = await db.fetchval("SELECT fortmod FROM characters WHERE nickname = $1;",name)
+        brute = await db.fetchval("SELECT brute FROM characters WHERE nickname = $1;",name)
+        force = await db.fetchval("SELECT force FROM characters WHERE nickname = $1;",name)
+        swimming = await db.fetchval("SELECT swimming FROM characters WHERE nickname = $1;",name)
+        digging = await db.fetchval("SELECT digging FROM characters WHERE nickname = $1;",name)
+        lithe = await db.fetchval("SELECT lithe FROM characters WHERE nickname = $1;",name)
+        litheMod = await db.fetchval("SELECT lithemod FROM characters WHERE nickname = $1;",name)
+        careful = await db.fetchval("SELECT careful FROM characters WHERE nickname = $1;",name)
+        contortion = await db.fetchval("SELECT contortion FROM characters WHERE nickname = $1;",name)
+        leaping = await db.fetchval("SELECT leaping FROM characters WHERE nickname = $1;",name)
+        throwing = await db.fetchval("SELECT throwing FROM characters WHERE nickname = $1;",name)
+        constitution = await db.fetchval("SELECT constitution FROM characters WHERE nickname = $1;",name)
+        conMod = await db.fetchval("SELECT conmod FROM characters WHERE nickname = $1;",name)
+        precoup = await db.fetchval("SELECT precoup FROM characters WHERE nickname = $1;",name)
+        mrecoup = await db.fetchval("SELECT mrecoup FROM characters WHERE nickname = $1;",name)
+        diet = await db.fetchval("SELECT diet FROM characters WHERE nickname = $1;",name)
+        exposure = await db.fetchval("SELECT exposure FROM characters WHERE nickname = $1;",name)
+        immunity = await db.fetchval("SELECT immunity FROM characters WHERE nickname = $1;",name)
+        empathy = await db.fetchval("SELECT empathy FROM characters WHERE nickname = $1;",name)
+        charisma = await db.fetchval("SELECT charisma FROM characters WHERE nickname = $1;",name)
+        memory = await db.fetchval("SELECT memory FROM characters WHERE nickname = $1;",name)
+        reasoning = await db.fetchval("SELECT reasoning FROM characters WHERE nickname = $1;",name)
+        perform = await db.fetchval("SELECT perform FROM characters WHERE nickname = $1;",name)
+        self = await db.fetchval("SELECT self FROM characters WHERE nickname = $1;",name)
+        trait = await db.fetchval("SELECT trait FROM characters WHERE nickname = $1;",name)
+        inventory = await db.fetchval("SELECT inventory FROM characters WHERE nickname = $1;",name)
+        image = await db.fetchval("SELECT image FROM characters WHERE nickname = $1;",name)
+        ownerID = await db.fetchval("SELECT owner_uid FROM characters WHERE nickname = $1;",name)
+        
+        embed1 = discord.Embed(colour=8163583,title="Character Sheet: "+fullName)
+        embed2 = discord.Embed(colour=8163583,title="Character Sheet: "+fullName)
+        
+        for stat in [physical, mental, maxPhysical, maxMental, defense, confidence, fortitude, fortMod, brute, force, swimming, digging, lithe, litheMod, careful, contortion, leaping, throwing, constitution, conMod, precoup, mrecoup, diet, exposure, immunity, empathy, charisma, memory, reasoning, perform, self, trait, inventory]:
+            if stat is None:
+                stat = "-"
+            stat = str(stat)
+
+        if image != None:
+            embed1.set_image(url=image)
+            embed2.set_image(url=image)
+
+        embed1.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
+        embed2.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
+
+        embed1.add_field(name="Vitality", value="Physical: "+physical+"/"+maxPhysical+"\nMental: "+mental+"/"maxMental, inline=True)
+        embed1.add_field(name="Defense", value=defense, inline=True)
+        embed1.add_field(name="Confidence", value=confidence, inline=True)
+        embed1.add_field(name="Fortitude: "+fortitude+"("+fortMod+")", value="Brute Attack:"+brute+"\nUse Force: "+force+"\nSwimming: "+swimming+"\nDigging: "+digging, inline=True)
+        embed1.add_field(name="Lithe: "+lithe+"("+litheMod+")", value="Careful Attack:"+careful+"\nContortion: "+contortion+"\nLeaping: "+leaping+"\nThrowing: "+throwing, inline=True)
+        embed1.add_field(name="Constitution: "+constitution+"("+conMod+")", value="Physical Recoup:"+precoup+"\nMental Recoup: "+mrecoup+"\nDiet: "+diet+"\nEExposure: "+exposure+"\nImmunity: "+immunity, inline=True)
+        embed1.add_field(name="Empathy: ("+empathy+")", value="", inline=True)
+        embed1.add_field(name="Charisma: ("+charisma+")", value="", inline=True)
+        embed1.add_field(name="Memory: ("+memory+")", value="", inline=True)
+        embed1.add_field(name="Reasoning: ("+reasoning+")", value="", inline=True)
+        embed1.add_field(name="Perform: ("+perform+")", value="", inline=True)
+        embed1.add_field(name="Self: ("+self+")", value="", inline=True)
+        
+        embed1.add_field(name="Unique Trait", value=trait, inline=False)
+        
+        embed2.add_field(name="Inventory", value=inventory, inline=False)
+        
+        embed1.set_footer(text="Page 1/2")
+        embed2.set_footer(text="Page 2/2")
+        
+        paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx, remove_reactions=True)
+        paginator.add_reaction('1️⃣', "page 0")
+        paginator.add_reaction('2️⃣', "page 1")
+
+        embeds = [embed1, embed2]
+        
+        await paginator.run(embeds)
+
+@sheet.command()
+async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str], *, newValue: typing.Optional[str]):
+    if setType is None:
+        await ctx.send("You can set: *physical, mental, maxphysical, maxmental, defense, confidence, fortitude, brute, force, swimming, digging, lithe, careful, contortion, leaping, throwing, constitution, precoup, mrecoup, diet, exposure, immunity, empathy, charisma, memory, reasoning, perform, self, trait, inventory*")
+    elif setType not in ["physical", "mental", "maxPhysical", "maxMental", "defense", "confidence", "fortitude", "fortMod", "brute", "force", "swimming", "digging", "lithe", "litheMod", "careful", "contortion", "leaping", "throwing", "constitution", "conMod", "precoup", "mrecoup", "diet", "exposure", "immunity", "empathy", "charisma", "memory", "reasoning", "perform", "self", "trait", "inventory"]:
+        await ctx.send("I don't recognize " + setType + " as a valid value. Please use one of the following: *physical, mental, maxphysical, maxmental, defense, confidence, fortitude, brute, force, swimming, digging, lithe, careful, contortion, leaping, throwing, constitution, precoup, mrecoup, diet, exposure, immunity, empathy, charisma, memory, reasoning, perform, self, trait, inventory*")
+    else:
+        nameCheck = await db.fetchval("SELECT nickname FROM characters WHERE nickname = $1;",nickname)
+        if nameCheck is None:
+            await ctx.send("I couldn't find a character with the nickname '" + nickname + "'")
+        else:
+            characterUser = await db.fetchval("SELECT owner_uid FROM characters WHERE nickname = $1;",nickname)
+            user = ctx.message.author.id
+            if (characterUser != user) or (user != adminID):
+                await ctx.send("That character does not belong to you.")
+            else:
+                if newValue is not None:
+                    inputLength = len(newValue)
+                else:
+                    inputLength = 0
+                if (inputLength > 1024):
+                    await ctx.send("Your new value must be 1024 characters or fewer.")
+                else:
+                    if setType in ["constitution","lithe","fortitude"]:
+                        newValue = modDict[newValue]
+                        if setType == "constitution":
+                            setType = "conMod"
+                        elif setType == "lithe":
+                            setType = "litheMod"
+                        elif setType == "fortitude":
+                            setType = "fortMod"
                 
+                    sqlText = "UPDATE characters SET " + setType + " = $1 WHERE nickname = $2;"
+                    await db.execute(sqlText,newValue,nickname)
+                    await ctx.send("Character " + nickname + " has been updated.")
+
+
+## DEV COMMANDS --------------------------------------------------------
 @bot.group()
 async def dev(ctx):
     pass
@@ -164,6 +314,10 @@ async def character(ctx, id: int):
     await db.execute("DELETE FROM characters WHERE id = $1;",id)
     await ctx.send("Deletion completed.")
     
+@dev.command()
+@is_dev()
+async def email(ctx):
+    await ctx.send("Your email is " + devEmail)
 
 ## Bot Setup & Activation ----------------------------------------------------------
 asyncio.get_event_loop().run_until_complete(run())
