@@ -76,24 +76,24 @@ def is_admin():
 @bot.group(invoke_without_command=True,aliases=["char"])
 async def character(ctx, name: str):
     emoji = ""
-    embed1 = discord.Embed(colour=0)
-    embed2 = discord.Embed(colour=0)
+    embed11 = discord.Embed()
+    embed22 = discord.Embed()
 
-    embed1.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
-    embed2.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
+    embed11.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
+    embed22.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
 
-    embed1.add_field(name="Full Name", value="fullName", inline=True)
+    embed11.add_field(name="Full Name", value="fullName", inline=True)
 
-    embed2.add_field(name="Backstory", value="here", inline=False)
+    embed22.add_field(name="Backstory", value="here", inline=False)
 
-    embed1.set_footer(text=emoji+"Page 1/2")
-    embed2.set_footer(text=emoji+"Page 2/2")
+    embed11.set_footer(text=emoji+"Page 1/2")
+    embed22.set_footer(text=emoji+"Page 2/2")
 
     paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx)
     paginator.add_reaction('1️⃣', "page 0")
     paginator.add_reaction('2️⃣', "page 1")
 
-    embeds = [embed1, embed2]
+    embeds = [embed11, embed22]
 
     await paginator.run(embeds)
     
