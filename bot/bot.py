@@ -158,7 +158,7 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
         else:
             characterUser = await db.fetchval("SELECT owner_uid FROM characters WHERE nickname = $1;",nickname)
             user = ctx.message.author.id
-            if (characterUser != user) or (user != adminID) or (user != devID):
+            if (characterUser != user) and (user != adminID) and (user != devID):
                 await ctx.send("That character does not belong to you.")
             else:
                 if newValue is not None:
@@ -276,7 +276,7 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
         else:
             characterUser = await db.fetchval("SELECT owner_uid FROM characters WHERE nickname = $1;",nickname)
             user = ctx.message.author.id
-            if (characterUser != user) or (user != adminID) or (user != devID):
+            if (characterUser != user) and (user != adminID) and (user != devID):
                 await ctx.send("That character does not belong to you.")
             else:
                 if newValue is not None:
