@@ -60,7 +60,10 @@ devEmail = os.environ.get('DEV_EMAIL')
 
 client = discord.Client()
 
-bot = commands.Bot(command_prefix='mi!', db=db)
+intents = discord.Intents.default() # save time typing this shit by saying it here
+intents.members = True
+
+bot = commands.Bot(command_prefix='mi!', db=db, intents=intents)
 
 def is_dev():
     def predicate(ctx):
