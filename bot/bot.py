@@ -8,7 +8,7 @@ import asyncpg
 import datetime
 import DiscordUtils
 
-import configsql
+from configsql import *
 
 db = None
 
@@ -49,6 +49,7 @@ async def run():
     db = await asyncpg.connect(dsn=dbURL, ssl='require')
     
     await db.execute(charProfilesSQL)
+    await db.execute(sheetProfilesSQL)
     
 ## Bot Setup ----------------------------------------------------------
     
