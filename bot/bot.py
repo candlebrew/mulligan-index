@@ -224,6 +224,11 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
                 else:
                     if setType == "colour":
                         setType = "color"
+                        
+                        if newValue is not None:
+                            newValue = newValue.replace("#","")
+                            newValue = int(newValue, 16)
+                        
                     sqlText = "UPDATE characters SET " + setType + " = $1 WHERE nickname = $2;"
                     await db.execute(sqlText,newValue,nickname)
                     await ctx.send("Character " + nickname + " has been updated.")
