@@ -214,7 +214,7 @@ async def sheet(ctx, name: str):
         memory = await db.fetchval("SELECT memory FROM characters WHERE nickname = $1;",name)
         reasoning = await db.fetchval("SELECT reasoning FROM characters WHERE nickname = $1;",name)
         perform = await db.fetchval("SELECT perform FROM characters WHERE nickname = $1;",name)
-        self = await db.fetchval("SELECT self FROM characters WHERE nickname = $1;",name)
+        Self = await db.fetchval("SELECT self FROM characters WHERE nickname = $1;",name)
         trait = await db.fetchval("SELECT trait FROM characters WHERE nickname = $1;",name)
         inventory = await db.fetchval("SELECT inventory FROM characters WHERE nickname = $1;",name)
         image = await db.fetchval("SELECT image FROM characters WHERE nickname = $1;",name)
@@ -223,7 +223,7 @@ async def sheet(ctx, name: str):
         embed1 = discord.Embed(colour=8163583,title="Character Sheet: "+fullName)
         embed2 = discord.Embed(colour=8163583,title="Character Sheet: "+fullName)
         
-        for stat in [physical, mental, maxPhysical, maxMental, defense, confidence, fortitude, fortMod, brute, force, swimming, digging, lithe, litheMod, careful, contortion, leaping, throwing, constitution, conMod, precoup, mrecoup, diet, exposure, immunity, empathy, charisma, memory, reasoning, perform, self, trait, inventory]:
+        for stat in [physical, mental, maxPhysical, maxMental, defense, confidence, fortitude, fortMod, brute, force, swimming, digging, lithe, litheMod, careful, contortion, leaping, throwing, constitution, conMod, precoup, mrecoup, diet, exposure, immunity, empathy, charisma, memory, reasoning, perform, Self, trait, inventory]:
             if stat is None:
                 stat = "-"
             stat = str(stat)
@@ -246,7 +246,7 @@ async def sheet(ctx, name: str):
         embed1.add_field(name="Memory: ("+memory+")", value="", inline=True)
         embed1.add_field(name="Reasoning: ("+reasoning+")", value="", inline=True)
         embed1.add_field(name="Perform: ("+perform+")", value="", inline=True)
-        embed1.add_field(name="Self: ("+self+")", value="", inline=True)
+        embed1.add_field(name="Self: ("+Self+")", value="", inline=True)
         
         embed1.add_field(name="Unique Trait", value=trait, inline=False)
         
