@@ -225,7 +225,7 @@ async def sheet(ctx, name: str):
         
         counter = 0
         
-        statList = [physical, mental, maxPhysical, maxMental, defense, confidence, fortitude, fortMod, brute, force, swimming, digging, lithe, litheMod, careful, contortion, leaping, throwing, constitution, conMod, precoup, mrecoup, diet, exposure, immunity, empathy, charisma, memory, reasoning, perform, Self, trait, inventory]:
+        statList = [physical, mental, maxPhysical, maxMental, defense, confidence, fortitude, fortMod, brute, force, swimming, digging, lithe, litheMod, careful, contortion, leaping, throwing, constitution, conMod, precoup, mrecoup, diet, exposure, immunity, empathy, charisma, memory, reasoning, perform, Self, trait, inventory]
         statList = ["-" if stat is None else stat for stat in statList]
         statList = [str(stat) for stat in statList]
 
