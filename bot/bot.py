@@ -74,8 +74,7 @@ def is_admin():
 
 ## Code Here ----------------------------------------------------------
 @bot.group(invoke_without_command=True,aliases=["char"])
-async def character(ctx, name: str):
-    emoji = ""
+async def character(ctx):
     embed11 = discord.Embed()
     embed22 = discord.Embed()
 
@@ -83,11 +82,7 @@ async def character(ctx, name: str):
     embed22.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
 
     embed11.add_field(name="Full Name", value="fullName", inline=True)
-
     embed22.add_field(name="Backstory", value="here", inline=False)
-
-    embed11.set_footer(text=emoji+"Page 1/2")
-    embed22.set_footer(text=emoji+"Page 2/2")
 
     paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx)
     paginator.add_reaction('1️⃣', "page 0")
