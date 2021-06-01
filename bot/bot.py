@@ -184,103 +184,103 @@ async def sheet(ctx, name: str):
         fullName = await db.fetchval("SELECT fullname FROM characters WHERE nickname = $1;",name)
         if fullName is None:
             fullName = name
-        physical = str(await db.fetchval("SELECT physical FROM characters WHERE nickname = str($1;",name))
+        physical = str(await db.fetchval("SELECT physical FROM characters WHERE nickname = $1;",name))
         if physical is None:
         	physical = "-"
-        mental = str(await db.fetchval("SELECT mental FROM characters WHERE nickname = str($1;",name))
+        mental = str(await db.fetchval("SELECT mental FROM characters WHERE nickname = $1;",name))
         if mental is None:
         	mental = "-"
-        maxPhysical = str(await db.fetchval("SELECT maxphysical FROM characters WHERE nickname = str($1;",name))
+        maxPhysical = str(await db.fetchval("SELECT maxphysical FROM characters WHERE nickname = $1;",name))
         if maxPhysical is None:
         	maxPhysical = "-"
-        maxMental = str(await db.fetchval("SELECT maxmental FROM characters WHERE nickname = str($1;",name))
+        maxMental = str(await db.fetchval("SELECT maxmental FROM characters WHERE nickname = $1;",name))
         if maxMental is None:
         	maxMental = "-"
-        defense = str(await db.fetchval("SELECT defense FROM characters WHERE nickname = str($1;",name))
+        defense = str(await db.fetchval("SELECT defense FROM characters WHERE nickname = $1;",name))
         if defense is None:
         	defense = "-"
-        confidence = str(await db.fetchval("SELECT confidence FROM characters WHERE nickname = str($1;",name))
+        confidence = str(await db.fetchval("SELECT confidence FROM characters WHERE nickname = $1;",name))
         if confidence is None:
         	confidence = "-"
-        fortitude = str(await db.fetchval("SELECT fortitude FROM characters WHERE nickname = str($1;",name))
+        fortitude = str(await db.fetchval("SELECT fortitude FROM characters WHERE nickname = $1;",name))
         if fortitude is None:
         	fortitude = "-"
-        fortMod = str(await db.fetchval("SELECT fortmod FROM characters WHERE nickname = str($1;",name))
+        fortMod = str(await db.fetchval("SELECT fortmod FROM characters WHERE nickname = $1;",name))
         if fortMod is None:
         	fortMod = "-"
-        brute = str(await db.fetchval("SELECT brute FROM characters WHERE nickname = str($1;",name))
+        brute = str(await db.fetchval("SELECT brute FROM characters WHERE nickname = $1;",name))
         if brute is None:
         	brute = "-"
-        force = str(await db.fetchval("SELECT force FROM characters WHERE nickname = str($1;",name))
+        force = str(await db.fetchval("SELECT force FROM characters WHERE nickname = $1;",name))
         if force is None:
         	force = "-"
-        swimming = str(await db.fetchval("SELECT swimming FROM characters WHERE nickname = str($1;",name))
+        swimming = str(await db.fetchval("SELECT swimming FROM characters WHERE nickname = $1;",name))
         if swimming is None:
         	swimming = "-"
-        digging = str(await db.fetchval("SELECT digging FROM characters WHERE nickname = str($1;",name))
+        digging = str(await db.fetchval("SELECT digging FROM characters WHERE nickname = $1;",name))
         if digging is None:
         	digging = "-"
-        lithe = str(await db.fetchval("SELECT lithe FROM characters WHERE nickname = str($1;",name))
+        lithe = str(await db.fetchval("SELECT lithe FROM characters WHERE nickname = $1;",name))
         if lithe is None:
         	lithe = "-"
-        litheMod = str(await db.fetchval("SELECT lithemod FROM characters WHERE nickname = str($1;",name))
+        litheMod = str(await db.fetchval("SELECT lithemod FROM characters WHERE nickname = $1;",name))
         if litheMod is None:
         	litheMod = "-"
-        careful = str(await db.fetchval("SELECT careful FROM characters WHERE nickname = str($1;",name))
+        careful = str(await db.fetchval("SELECT careful FROM characters WHERE nickname = $1;",name))
         if careful is None:
         	careful = "-"
-        contortion = str(await db.fetchval("SELECT contortion FROM characters WHERE nickname = str($1;",name))
+        contortion = str(await db.fetchval("SELECT contortion FROM characters WHERE nickname = $1;",name))
         if contortion is None:
         	contortion = "-"
-        leaping = str(await db.fetchval("SELECT leaping FROM characters WHERE nickname = str($1;",name))
+        leaping = str(await db.fetchval("SELECT leaping FROM characters WHERE nickname = $1;",name))
         if leaping is None:
         	leaping = "-"
-        throwing = str(await db.fetchval("SELECT throwing FROM characters WHERE nickname = str($1;",name))
+        throwing = str(await db.fetchval("SELECT throwing FROM characters WHERE nickname = $1;",name))
         if throwing is None:
         	throwing = "-"
-        constitution = str(await db.fetchval("SELECT constitution FROM characters WHERE nickname = str($1;",name))
+        constitution = str(await db.fetchval("SELECT constitution FROM characters WHERE nickname = $1;",name))
         if constitution is None:
         	constitution = "-"
-        conMod = str(await db.fetchval("SELECT conmod FROM characters WHERE nickname = str($1;",name))
+        conMod = str(await db.fetchval("SELECT conmod FROM characters WHERE nickname = $1;",name))
         if conMod is None:
         	conMod = "-"
-        precoup = str(await db.fetchval("SELECT precoup FROM characters WHERE nickname = str($1;",name))
+        precoup = str(await db.fetchval("SELECT precoup FROM characters WHERE nickname = $1;",name))
         if precoup is None:
         	precoup = "-"
-        mrecoup = str(await db.fetchval("SELECT mrecoup FROM characters WHERE nickname = str($1;",name))
+        mrecoup = str(await db.fetchval("SELECT mrecoup FROM characters WHERE nickname = $1;",name))
         if mrecoup is None:
         	mrecoup = "-"
-        diet = str(await db.fetchval("SELECT diet FROM characters WHERE nickname = str($1;",name))
+        diet = str(await db.fetchval("SELECT diet FROM characters WHERE nickname = $1;",name))
         if diet is None:
         	diet = "-"
-        exposure = str(await db.fetchval("SELECT exposure FROM characters WHERE nickname = str($1;",name))
+        exposure = str(await db.fetchval("SELECT exposure FROM characters WHERE nickname = $1;",name))
         if exposure is None:
         	exposure = "-"
-        immunity = str(await db.fetchval("SELECT immunity FROM characters WHERE nickname = str($1;",name))
+        immunity = str(await db.fetchval("SELECT immunity FROM characters WHERE nickname = $1;",name))
         if immunity is None:
         	immunity = "-"
-        empathy = str(await db.fetchval("SELECT empathy FROM characters WHERE nickname = str($1;",name))
+        empathy = str(await db.fetchval("SELECT empathy FROM characters WHERE nickname = $1;",name))
         if empathy is None:
         	empathy = "-"
-        charisma = str(await db.fetchval("SELECT charisma FROM characters WHERE nickname = str($1;",name))
+        charisma = str(await db.fetchval("SELECT charisma FROM characters WHERE nickname = $1;",name))
         if charisma is None:
         	charisma = "-"
-        memory = str(await db.fetchval("SELECT memory FROM characters WHERE nickname = str($1;",name))
+        memory = str(await db.fetchval("SELECT memory FROM characters WHERE nickname = $1;",name))
         if memory is None:
         	memory = "-"
-        reasoning = str(await db.fetchval("SELECT reasoning FROM characters WHERE nickname = str($1;",name))
+        reasoning = str(await db.fetchval("SELECT reasoning FROM characters WHERE nickname = $1;",name))
         if reasoning is None:
         	reasoning = "-"
-        perform = str(await db.fetchval("SELECT perform FROM characters WHERE nickname = str($1;",name))
+        perform = str(await db.fetchval("SELECT perform FROM characters WHERE nickname = $1;",name))
         if perform is None:
         	perform = "-"
-        Self = str(await db.fetchval("SELECT Self FROM characters WHERE nickname = str($1;",name))
+        Self = str(await db.fetchval("SELECT self FROM characters WHERE nickname = $1;",name))
         if Self is None:
         	Self = "-"
-        trait = str(await db.fetchval("SELECT trait FROM characters WHERE nickname = str($1;",name))
+        trait = str(await db.fetchval("SELECT trait FROM characters WHERE nickname = $1;",name))
         if trait is None:
         	trait = "-"
-        inventory = str(await db.fetchval("SELECT inventory FROM characters WHERE nickname = str($1;",name))
+        inventory = str(await db.fetchval("SELECT inventory FROM characters WHERE nickname = $1;",name))
         if inventory is None:
         	inventory = "-"
         image = await db.fetchval("SELECT image FROM characters WHERE nickname = $1;",name)
