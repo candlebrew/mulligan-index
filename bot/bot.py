@@ -345,21 +345,26 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
                     inputLength = 0
                 if (inputLength > 1024):
                     await ctx.send("Your new value must be 1024 characters or fewer.")
-                else:
+                else:       
+                    if setType in ["physical", "mental", "maxphysical", "maxmental", "defense", "confidence", "fortitude", "fortMod", "brute", "force", "swimming", "digging", "lithe", "litheMod", "careful", "contortion", "leaping", "throwing", "constitution", "conMod", "precoup", "mrecoup", "diet", "exposure", "immunity", "empathy", "charisma", "memory", "reasoning", "perform", "self"]:
+                        newValue = int(newValue)
+                
+                    sqlText = "UPDATE characters SET " + setType + " = $1 WHERE nickname = $2;"
+                    await db.execute(sqlText,newValue,nickname)
+                    
                     if setType in ["constitution","lithe","fortitude"]:
                         newValue = modDict[int(newValue)]
+                        
                         if setType == "constitution":
                             setType = "conMod"
                         elif setType == "lithe":
                             setType = "litheMod"
                         elif setType == "fortitude":
                             setType = "fortMod"
-                            
-                    if setType in ["physical", "mental", "maxphysical", "maxmental", "defense", "confidence", "fortitude", "fortMod", "brute", "force", "swimming", "digging", "lithe", "litheMod", "careful", "contortion", "leaping", "throwing", "constitution", "conMod", "precoup", "mrecoup", "diet", "exposure", "immunity", "empathy", "charisma", "memory", "reasoning", "perform", "self"]:
-                        newValue = int(newValue)
-                
-                    sqlText = "UPDATE characters SET " + setType + " = $1 WHERE nickname = $2;"
-                    await db.execute(sqlText,newValue,nickname)
+                        
+                        sqlText = "UPDATE characters SET " + setType + " = $1 WHERE nickname = $2;"
+                        await db.execute(sqlText,newValue,nickname)
+                    
                     await ctx.send("Character " + nickname + " has been updated.")
 
 
