@@ -200,7 +200,7 @@ async def new(ctx, nickname: str, *, fullName: typing.Optional[str]):
 @character.command()
 async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str], *, newValue: typing.Optional[str]):
     if setType is None:
-        await ctx.send("You can set: *nickname, fullname, pronouns, age, date, tribe, rank, appearance, personality, sheet, image*")
+        await ctx.send("You can set: *nickname, quote, color, emoji, fullname, pronouns, age, date, tribe, rank, appearance, sheet, personality, backstory, note1(2,3,4), note1(2,3,4)name, image*")
     elif setType not in ["nickname","fullname","pronouns","age","date","tribe","rank","appearance","personality","sheet","image","backstory","note1","note2","note3","note4","note1name","note2name","note3name","note4name","color","colour","emoji","quote"]:
         await ctx.send("I don't recognize " + setType + " as a valid value. Please use one of the following: *nickname, quote, color, emoji, fullname, pronouns, age, date, tribe, rank, appearance, sheet, personality, backstory, note1(2,3,4), note1(2,3,4)name, image*")
     else:
