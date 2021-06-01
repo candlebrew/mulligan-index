@@ -354,6 +354,9 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
                             setType = "litheMod"
                         elif setType == "fortitude":
                             setType = "fortMod"
+                            
+                    if setType in ["physical", "mental", "maxPhysical", "maxMental", "defense", "confidence", "fortitude", "fortMod", "brute", "force", "swimming", "digging", "lithe", "litheMod", "careful", "contortion", "leaping", "throwing", "constitution", "conMod", "precoup", "mrecoup", "diet", "exposure", "immunity", "empathy", "charisma", "memory", "reasoning", "perform", "self"]:
+                        newValue = int(newValue)
                 
                     sqlText = "UPDATE characters SET " + setType + " = $1 WHERE nickname = $2;"
                     await db.execute(sqlText,newValue,nickname)
