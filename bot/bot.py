@@ -184,103 +184,103 @@ async def sheet(ctx, name: str):
         fullName = await db.fetchval("SELECT fullname FROM characters WHERE nickname = $1;",name)
         if fullName is None:
             fullName = name
-        physical = str(await db.fetchval("SELECT physical FROM characters WHERE nickname = $1;",name))
+        physical = await db.fetchval("SELECT physical FROM characters WHERE nickname = $1;",name)
         if physical is None:
         	physical = "-"
-        mental = str(await db.fetchval("SELECT mental FROM characters WHERE nickname = $1;",name))
+        mental = await db.fetchval("SELECT mental FROM characters WHERE nickname = $1;",name)
         if mental is None:
         	mental = "-"
-        maxPhysical = str(await db.fetchval("SELECT maxphysical FROM characters WHERE nickname = $1;",name))
+        maxPhysical = await db.fetchval("SELECT maxphysical FROM characters WHERE nickname = $1;",name)
         if maxPhysical is None:
         	maxPhysical = "-"
-        maxMental = str(await db.fetchval("SELECT maxmental FROM characters WHERE nickname = $1;",name))
+        maxMental = await db.fetchval("SELECT maxmental FROM characters WHERE nickname = $1;",name)
         if maxMental is None:
         	maxMental = "-"
-        defense = str(await db.fetchval("SELECT defense FROM characters WHERE nickname = $1;",name))
+        defense = await db.fetchval("SELECT defense FROM characters WHERE nickname = $1;",name)
         if defense is None:
         	defense = "-"
-        confidence = str(await db.fetchval("SELECT confidence FROM characters WHERE nickname = $1;",name))
+        confidence = await db.fetchval("SELECT confidence FROM characters WHERE nickname = $1;",name)
         if confidence is None:
         	confidence = "-"
-        fortitude = str(await db.fetchval("SELECT fortitude FROM characters WHERE nickname = $1;",name))
+        fortitude = await db.fetchval("SELECT fortitude FROM characters WHERE nickname = $1;",name)
         if fortitude is None:
         	fortitude = "-"
-        fortMod = str(await db.fetchval("SELECT fortmod FROM characters WHERE nickname = $1;",name))
+        fortMod = await db.fetchval("SELECT fortmod FROM characters WHERE nickname = $1;",name)
         if fortMod is None:
         	fortMod = "-"
-        brute = str(await db.fetchval("SELECT brute FROM characters WHERE nickname = $1;",name))
+        brute = await db.fetchval("SELECT brute FROM characters WHERE nickname = $1;",name)
         if brute is None:
         	brute = "-"
-        force = str(await db.fetchval("SELECT force FROM characters WHERE nickname = $1;",name))
+        force = await db.fetchval("SELECT force FROM characters WHERE nickname = $1;",name)
         if force is None:
         	force = "-"
-        swimming = str(await db.fetchval("SELECT swimming FROM characters WHERE nickname = $1;",name))
+        swimming = await db.fetchval("SELECT swimming FROM characters WHERE nickname = $1;",name)
         if swimming is None:
         	swimming = "-"
-        digging = str(await db.fetchval("SELECT digging FROM characters WHERE nickname = $1;",name))
+        digging = await db.fetchval("SELECT digging FROM characters WHERE nickname = $1;",name)
         if digging is None:
         	digging = "-"
-        lithe = str(await db.fetchval("SELECT lithe FROM characters WHERE nickname = $1;",name))
+        lithe = await db.fetchval("SELECT lithe FROM characters WHERE nickname = $1;",name)
         if lithe is None:
         	lithe = "-"
-        litheMod = str(await db.fetchval("SELECT lithemod FROM characters WHERE nickname = $1;",name))
+        litheMod = await db.fetchval("SELECT lithemod FROM characters WHERE nickname = $1;",name)
         if litheMod is None:
         	litheMod = "-"
-        careful = str(await db.fetchval("SELECT careful FROM characters WHERE nickname = $1;",name))
+        careful = await db.fetchval("SELECT careful FROM characters WHERE nickname = $1;",name)
         if careful is None:
         	careful = "-"
-        contortion = str(await db.fetchval("SELECT contortion FROM characters WHERE nickname = $1;",name))
+        contortion = await db.fetchval("SELECT contortion FROM characters WHERE nickname = $1;",name)
         if contortion is None:
         	contortion = "-"
-        leaping = str(await db.fetchval("SELECT leaping FROM characters WHERE nickname = $1;",name))
+        leaping = await db.fetchval("SELECT leaping FROM characters WHERE nickname = $1;",name)
         if leaping is None:
         	leaping = "-"
-        throwing = str(await db.fetchval("SELECT throwing FROM characters WHERE nickname = $1;",name))
+        throwing = await db.fetchval("SELECT throwing FROM characters WHERE nickname = $1;",name)
         if throwing is None:
         	throwing = "-"
-        constitution = str(await db.fetchval("SELECT constitution FROM characters WHERE nickname = $1;",name))
+        constitution = await db.fetchval("SELECT constitution FROM characters WHERE nickname = $1;",name)
         if constitution is None:
         	constitution = "-"
-        conMod = str(await db.fetchval("SELECT conmod FROM characters WHERE nickname = $1;",name))
+        conMod = await db.fetchval("SELECT conmod FROM characters WHERE nickname = $1;",name)
         if conMod is None:
         	conMod = "-"
-        precoup = str(await db.fetchval("SELECT precoup FROM characters WHERE nickname = $1;",name))
+        precoup = await db.fetchval("SELECT precoup FROM characters WHERE nickname = $1;",name)
         if precoup is None:
         	precoup = "-"
-        mrecoup = str(await db.fetchval("SELECT mrecoup FROM characters WHERE nickname = $1;",name))
+        mrecoup = await db.fetchval("SELECT mrecoup FROM characters WHERE nickname = $1;",name)
         if mrecoup is None:
         	mrecoup = "-"
-        diet = str(await db.fetchval("SELECT diet FROM characters WHERE nickname = $1;",name))
+        diet = await db.fetchval("SELECT diet FROM characters WHERE nickname = $1;",name)
         if diet is None:
         	diet = "-"
-        exposure = str(await db.fetchval("SELECT exposure FROM characters WHERE nickname = $1;",name))
+        exposure = await db.fetchval("SELECT exposure FROM characters WHERE nickname = $1;",name)
         if exposure is None:
         	exposure = "-"
-        immunity = str(await db.fetchval("SELECT immunity FROM characters WHERE nickname = $1;",name))
+        immunity = await db.fetchval("SELECT immunity FROM characters WHERE nickname = $1;",name)
         if immunity is None:
         	immunity = "-"
-        empathy = str(await db.fetchval("SELECT empathy FROM characters WHERE nickname = $1;",name))
+        empathy = await db.fetchval("SELECT empathy FROM characters WHERE nickname = $1;",name)
         if empathy is None:
         	empathy = "-"
-        charisma = str(await db.fetchval("SELECT charisma FROM characters WHERE nickname = $1;",name))
+        charisma = await db.fetchval("SELECT charisma FROM characters WHERE nickname = $1;",name)
         if charisma is None:
         	charisma = "-"
-        memory = str(await db.fetchval("SELECT memory FROM characters WHERE nickname = $1;",name))
+        memory = await db.fetchval("SELECT memory FROM characters WHERE nickname = $1;",name)
         if memory is None:
         	memory = "-"
-        reasoning = str(await db.fetchval("SELECT reasoning FROM characters WHERE nickname = $1;",name))
+        reasoning = await db.fetchval("SELECT reasoning FROM characters WHERE nickname = $1;",name)
         if reasoning is None:
         	reasoning = "-"
-        perform = str(await db.fetchval("SELECT perform FROM characters WHERE nickname = $1;",name))
+        perform = await db.fetchval("SELECT perform FROM characters WHERE nickname = $1;",name)
         if perform is None:
         	perform = "-"
-        Self = str(await db.fetchval("SELECT self FROM characters WHERE nickname = $1;",name))
+        Self = await db.fetchval("SELECT self FROM characters WHERE nickname = $1;",name)
         if Self is None:
         	Self = "-"
-        trait = str(await db.fetchval("SELECT trait FROM characters WHERE nickname = $1;",name))
+        trait = await db.fetchval("SELECT trait FROM characters WHERE nickname = $1;",name)
         if trait is None:
         	trait = "-"
-        inventory = str(await db.fetchval("SELECT inventory FROM characters WHERE nickname = $1;",name))
+        inventory = await db.fetchval("SELECT inventory FROM characters WHERE nickname = $1;",name)
         if inventory is None:
         	inventory = "-"
         image = await db.fetchval("SELECT image FROM characters WHERE nickname = $1;",name)
@@ -298,15 +298,15 @@ async def sheet(ctx, name: str):
         embed1.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
         embed2.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
 
-        embed1.add_field(name="Vitality", value="Physical: "+physical+"/"+maxPhysical+"\nMental: "+mental+"/"+maxMental, inline=True)
-        embed1.add_field(name="Defense", value=defense, inline=True)
-        embed1.add_field(name="Confidence", value=confidence, inline=True)
-        embed1.add_field(name="Fortitude: "+fortitude+"("+fortMod+")", value="Brute Attack:"+brute+"\nUse Force: "+force+"\nSwimming: "+swimming+"\nDigging: "+digging, inline=True)
-        embed1.add_field(name="Lithe: "+lithe+"("+litheMod+")", value="Careful Attack:"+careful+"\nContortion: "+contortion+"\nLeaping: "+leaping+"\nThrowing: "+throwing, inline=True)
-        embed1.add_field(name="Constitution: "+constitution+"("+conMod+")", value="Physical Recoup:"+precoup+"\nMental Recoup: "+mrecoup+"\nDiet: "+diet+"\nEExposure: "+exposure+"\nImmunity: "+immunity, inline=True)
-        embed1.add_field(name="Empathy: ("+empathy+")", value="\n**Reasoning: ("+reasoning+")**", inline=True)
-        embed1.add_field(name="Charisma: ("+charisma+")", value="**Perform: ("+perform+")**", inline=True)
-        embed1.add_field(name="Memory: ("+memory+")", value="**Self: ("+Self+")**", inline=True)
+        embed1.add_field(name="Vitality", value="Physical: "+str(physical)+"/"+str(maxPhysical)+"\nMental: "+str(mental)+"/"+str(maxMental), inline=True)
+        embed1.add_field(name="Defense", value=(defense), inline=True)
+        embed1.add_field(name="Confidence", value=(confidence), inline=True)
+        embed1.add_field(name="Fortitude: "+str(fortitude)+"("+str(fortMod)+")", value="Brute Attack:"+str(brute)+"\nUse Force: "+str(force)+"\nSwimming: "+str(swimming)+"\nDigging: "+str(digging), inline=True)
+        embed1.add_field(name="Lithe: "+str(lithe)+"("+str(litheMod)+")", value="Careful Attack:"+str(careful)+"\nContortion: "+str(contortion)+"\nLeaping: "+str(leaping)+"\nThrowing: "+str(throwing), inline=True)
+        embed1.add_field(name="Constitution: "+str(constitution)+"("+str(conMod)+")", value="Physical Recoup:"+str(precoup)+"\nMental Recoup: "+str(mrecoup)+"\nDiet: "+str(diet)+"\nEExposure: "+str(exposure)+"\nImmunity: "+str(immunity), inline=True)
+        embed1.add_field(name="Empathy: ("+str(empathy)+")", value="\n**Reasoning: ("+str(reasoning)+")**", inline=True)
+        embed1.add_field(name="Charisma: ("+str(charisma)+")", value="**Perform: ("+str(perform)+")**", inline=True)
+        embed1.add_field(name="Memory: ("+str(memory)+")", value="**Self: ("+str(Self)+")**", inline=True)
         
         embed1.add_field(name="Unique Trait", value=trait, inline=False)
         
