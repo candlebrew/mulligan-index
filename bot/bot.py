@@ -222,7 +222,7 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
                 elif (inputLength > 1024):
                     await ctx.send("Your new value must be 1024 characters or fewer.")
                 else:
-                    if setType == "colour":
+                    if setType in ["colour","color"]:
                         setType = "color"
                         
                         if newValue is not None:
