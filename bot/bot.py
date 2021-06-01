@@ -225,14 +225,9 @@ async def sheet(ctx, name: str):
         
         counter = 0
         
-        for stat in [physical, mental, maxPhysical, maxMental, defense, confidence, fortitude, fortMod, brute, force, swimming, digging, lithe, litheMod, careful, contortion, leaping, throwing, constitution, conMod, precoup, mrecoup, diet, exposure, immunity, empathy, charisma, memory, reasoning, perform, Self, trait, inventory]:
-            await ctx.send("stat")
-            counter += 1
-            if counter >= 5:
-               break
-            if stat is None:
-                stat = "-"
-            stat = str(stat)
+        statList = [physical, mental, maxPhysical, maxMental, defense, confidence, fortitude, fortMod, brute, force, swimming, digging, lithe, litheMod, careful, contortion, leaping, throwing, constitution, conMod, precoup, mrecoup, diet, exposure, immunity, empathy, charisma, memory, reasoning, perform, Self, trait, inventory]:
+        statList = ["-" if stat is None else stat for stat in statList]
+        statList = [str(stat) for stat in statList]
 
         if image != None:
             embed1.set_image(url=image)
