@@ -73,67 +73,112 @@ def is_admin():
     return commands.check(predicate)
 
 ## Code Here ----------------------------------------------------------
-
 @bot.group(invoke_without_command=True,aliases=["char"])
 async def character(ctx, name: str):
     nameCheck = await db.fetchval("SELECT nickname FROM characters WHERE nickname = $1;",name)
     if nameCheck is None:
         await ctx.send("I couldn't find a character with the nickname '" + name + "'")
     else:
-        embed = discord.Embed(colour=8163583)
-
         fullName = await db.fetchval("SELECT fullname FROM characters WHERE nickname = $1;",name)
         if fullName is None:
             fullName = name
-        fullName += "\u200B\u200B"
         pronouns = await db.fetchval("SELECT pronouns FROM characters WHERE nickname = $1;",name)
         if pronouns is None:
             pronouns = "-"
-        pronouns += "\u200B\u200B"
         creationAge = await db.fetchval("SELECT age FROM characters WHERE nickname = $1;",name)
         if creationAge is None:
             creationAge = "-"
-        creationAge += "\u200B\u200B"
         creationDate = await db.fetchval("SELECT date FROM characters WHERE nickname = $1;",name)
         if creationDate is None:
             creationDate = "-"
-        creationDate += "\u200B\u200B"
         tribe = await db.fetchval("SELECT tribe FROM characters WHERE nickname = $1;",name)
         if tribe is None:
             tribe = "-"
-        tribe += "\u200B\u200B"
         rank = await db.fetchval("SELECT rank FROM characters WHERE nickname = $1;",name)
         if rank is None:
             rank = "-"
-        rank += "\u200B\u200B"
         appearance = await db.fetchval("SELECT appearance FROM characters WHERE nickname = $1;",name)
-        if appearance is None:
-            appearance = "-"
         personality = await db.fetchval("SELECT personality FROM characters WHERE nickname = $1;",name)
-        if personality is None:
-            personality = "-"
+        backstory = await db.fetchval("SELECT backstory FROM characters WHERE nickname = $1;",name)
         sheetURL =  await db.fetchval("SELECT sheet FROM characters WHERE nickname = $1;",name)
         if sheetURL is None:
             sheetURL = "-"
+        quote = await db.fetchval("SELECT quote FROM characters WHERE nickname = $1;",name)
+        emoji = await db.fetchval("SELECT emoji FROM characters WHERE nickname = $1;",name)
+        if emoji is None:
+            emoji = ""
+        else:
+            emoji += " "
+        color = await db.fetchval("SELECT color FROM characters WHERE nickname = $1;",name)
+        if color is None:
+            color = 8163583
+        note1 = await db.fetchval("SELECT note1 FROM characters WHERE nickname = $1;",name)
+        note2 = await db.fetchval("SELECT note2 FROM characters WHERE nickname = $1;",name)
+        note3 = await db.fetchval("SELECT note3 FROM characters WHERE nickname = $1;",name)
+        note4 = await db.fetchval("SELECT note4 FROM characters WHERE nickname = $1;",name)
+        note1name = await db.fetchval("SELECT note1name FROM characters WHERE nick = $1;",)
+        note2name = await db.fetchval("SELECT note2name FROM characters WHERE nick = $1;",)
+        note3name = await db.fetchval("SELECT note3name FROM characters WHERE nick = $1;",)
+        note4name = await db.fetchval("SELECT note4name FROM characters WHERE nick = $1;",)
         image = await db.fetchval("SELECT image FROM characters WHERE nickname = $1;",name)
         ownerID = await db.fetchval("SELECT owner_uid FROM characters WHERE nickname = $1;",name)
 
+        if quote is not None:
+            quote = "*" + quote + "*"
+            embed1 = discord.Embed(colour=color,title=quote)
+        else:
+            embed1 = discord.Embed(colour=color)
+            
+        embed2 = discord.Embed(colour=color)
+
         if image != None:
-            embed.set_image(url=image)
+            embed1.set_image(url=image)
+            embed2.set_image(url=image)
 
-        embed.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
+        embed1.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
+        embed2.set_thumbnail(url="https://i.imgur.com/Qpen3fF.png")
+        
+        embed1.add_field(name=emoji+"Full Name", value=fullName, inline=True)
+        embed1.add_field(name=emoji+"Pronouns", value=pronouns, inline=True)
+        embed1.add_field(name=emoji+"Age on Creation", value=creationAge, inline=True)
+        embed1.add_field(name=emoji+"Tribe", value=tribe, inline=True)
+        embed1.add_field(name=emoji+"Rank", value=rank, inline=True)
+        embed1.add_field(name=emoji+"Date of Creation", value=creationDate, inline=True)
+        
+        embed1.add_field(name=emoji+"Appearance", value=appearance, inline=False)
+        embed1.add_field(name=emoji+"Character Sheet Url", value=sheetURL, inline=False)
+        embed2.add_field(name=emoji+"Personality", value=personality, inline=False)
+        embed2.add_field(name=emoji+"Backstory", value=backstory, inline=False)
+        
+        if note1 is not None:
+            if note1name is None:
+                note1name = "Note 1"
+            embed1.add_field(name=note1name, value=note1, inline=False)
+        if note2 is not None:
+            if note2name is None:
+                note2name = "Note 2"
+            embed1.add_field(name=note2name, value=note2, inline=False)
+        if note3 is not None:
+            if note3name is None:
+                note3name = "Note 3"
+            embed1.add_field(name=note3name, value=note3, inline=False)
+        if note4 is not None:
+            if note4name is None:
+                note4name = "Note 4"
+            embed1.add_field(name=note4name, value=note4, inline=False)
+            
+        if "<" in emoji:
+            emoji = ""
 
-        embed.add_field(name="Full Name", value=fullName, inline=True)
-        embed.add_field(name="Pronouns", value=pronouns, inline=True)
-        embed.add_field(name="Age on Creation", value=creationAge, inline=True)
-        embed.add_field(name="Tribe", value=tribe, inline=True)
-        embed.add_field(name="Rank", value=rank, inline=True)
-        embed.add_field(name="Date of Creation", value=creationDate, inline=True)
-        embed.add_field(name="Appearance", value=appearance, inline=False)
-        embed.add_field(name="Personality", value=personality, inline=False)
-        embed.add_field(name="Character Sheet Url", value=sheetURL, inline=False)
-
-        await ctx.send(embed=embed)
+        embed1.set_footer(text=emoji+"Page 1/2")
+        embed2.set_footer(text=emoji+"Page 2/2")
+            
+        paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx, remove_reactions=True)
+        paginator.add_reaction('1️⃣', "page 0")
+        paginator.add_reaction('2️⃣', "page 1")
+        
+        embeds = [embed1, embed2]
+        await paginator.run(embeds)
     
 @character.command()
 async def new(ctx, nickname: str, *, fullName: typing.Optional[str]):
@@ -149,8 +194,8 @@ async def new(ctx, nickname: str, *, fullName: typing.Optional[str]):
 async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str], *, newValue: typing.Optional[str]):
     if setType is None:
         await ctx.send("You can set: *nickname, fullname, pronouns, age, date, tribe, rank, appearance, personality, sheet, image*")
-    elif setType not in ["nickname","fullname","pronouns","age","date","tribe","rank","appearance","personality","sheet","image"]:
-        await ctx.send("I don't recognize " + setType + " as a valid value. Please use one of the following: *nickname, fullname, pronouns, age, date, tribe, rank, appearance, personality, sheet, image*")
+    elif setType not in ["nickname","fullname","pronouns","age","date","tribe","rank","appearance","personality","sheet","image","backstory","note1","note2","note3","note4","note1name","note2name","note3name","note4name","color","colour","emoji","quote:]:
+        await ctx.send("I don't recognize " + setType + " as a valid value. Please use one of the following: *nickname, quote, color, emoji, fullname, pronouns, age, date, tribe, rank, appearance, sheet, personality, backstory, note1(2,3,4), note1(2,3,4)name, image*")
     else:
         nameCheck = await db.fetchval("SELECT nickname FROM characters WHERE nickname = $1;",nickname)
         if nameCheck is None:
@@ -170,10 +215,11 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
                 elif (inputLength > 1024):
                     await ctx.send("Your new value must be 1024 characters or fewer.")
                 else:
+                    if setType == "colour":
+                        setType = "color"
                     sqlText = "UPDATE characters SET " + setType + " = $1 WHERE nickname = $2;"
                     await db.execute(sqlText,newValue,nickname)
                     await ctx.send("Character " + nickname + " has been updated.")
-
 
 @bot.group(invoke_without_command=True)
 async def sheet(ctx, name: str):
