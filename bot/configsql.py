@@ -78,4 +78,4 @@ sheetProfilesSQL = '''
 
     ALTER TABLE characters ADD COLUMN IF NOT EXISTS trait TEXT;
 
-    ALTER TABLE characters ADD COLUMN IF NOT EXISTS inventory TEXT;
+    ALTER TABLE characters ADD COLUMN IF NOT EXISTS inventory TEXT;'''
