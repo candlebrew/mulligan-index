@@ -437,6 +437,29 @@ async def character(ctx, id: int):
 @is_dev()
 async def email(ctx):
     await ctx.send("Your email is " + devEmail)
+    
+@dev.command()
+async def paginate(ctx):
+    embed1 = discord.Embed(color=ctx.author.color).add_field(name="Example", value="Page 1")
+    embed2 = discord.Embed(color=ctx.author.color).add_field(name="Example", value="Page 2")
+    embed3 = discord.Embed(color=ctx.author.color).add_field(name="Example", value="Page 3")
+    paginator = DiscordUtils.Pagination.AutoEmbedPaginator(ctx)
+    embeds = [embed1, embed2, embed3]
+    await paginator.run(embeds)
+    
+@dev.command()
+async def paginatec(ctx):
+    embed1 = discord.Embed(color=ctx.author.color).add_field(name="Example", value="Page 1")
+    embed2 = discord.Embed(color=ctx.author.color).add_field(name="Example", value="Page 2")
+    embed3 = discord.Embed(color=ctx.author.color).add_field(name="Example", value="Page 3")
+    paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx)
+    paginator.add_reaction('⏮️', "first")
+    paginator.add_reaction('⏪', "back")
+    paginator.add_reaction('🔐', "lock")
+    paginator.add_reaction('⏩', "next")
+    paginator.add_reaction('⏭️', "last")
+    embeds = [embed1, embed2, embed3]
+    await paginator.run(embeds)
 
 ## Bot Setup & Activation ----------------------------------------------------------
 asyncio.get_event_loop().run_until_complete(run())
