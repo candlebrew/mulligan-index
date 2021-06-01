@@ -176,8 +176,9 @@ async def character(ctx, name: str):
         paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx, remove_reactions=True)
         paginator.add_reaction('1️⃣', "page 0")
         paginator.add_reaction('2️⃣', "page 1")
-        
+
         embeds = [embed1, embed2]
+        
         await paginator.run(embeds)
     
 @character.command()
