@@ -170,8 +170,8 @@ async def character(ctx, name: str):
         if "<" in emoji:
             emoji = ""
 
-        embed1.set_footer(text=emoji+"Page 1/2")
-        embed2.set_footer(text=emoji+"Page 2/2")
+        #embed1.set_footer(text=emoji+"Page 1/2")
+        #embed2.set_footer(text=emoji+"Page 2/2")
             
         paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx)
         paginator.add_reaction('1️⃣', "page 0")
