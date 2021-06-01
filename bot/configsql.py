@@ -56,6 +56,8 @@ charProfilesSQL = '''
         
         ALTER TABLE characters ADD COLUMN IF NOT EXISTS mentalrecoup INT;
         
+        ALTER TABLE characters ADD COLUMN IF NOT EXISTS mrecoup INT;
+        
         ALTER TABLE characters ADD COLUMN IF NOT EXISTS diet INT;
         
         ALTER TABLE characters ADD COLUMN IF NOT EXISTS exposure INT;
