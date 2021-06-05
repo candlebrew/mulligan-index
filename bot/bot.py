@@ -12,33 +12,6 @@ from configsql import *
 
 db = None
 
-modDict = {
-    1: -5,
-    2: -4,
-    3: -4,
-    4: -3,
-    5: -3,
-    6: -2,
-    7: -2,
-    8: -1,
-    9: -1,
-    10: 0,
-    11: 0,
-    12: 1,
-    13: 1,
-    14: 2,
-    15: 2,
-    16: 3,
-    17: 3, 
-    18: 4,
-    19: 4,
-    20: 5,
-    21: 5,
-    22: 6,
-    23: 6,
-    24: 7,
-    25: 7}
-
 # https://discord.com/api/oauth2/authorize?client_id=843224909958479933&permissions=268823632&scope=bot
 
 ## Connecting the DB ----------------------------------------------------------
@@ -411,7 +384,7 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
                     await db.execute(sqlText,newValue,nickname)
                     
                     if setType in ["constitution","lithe","fortitude"]:
-                        newValue = modDict[int(newValue)]
+                        newValue -= 10
                         
                         if setType == "constitution":
                             setType = "conMod"
