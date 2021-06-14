@@ -48,7 +48,7 @@ def is_admin():
         return ctx.message.author.id == adminID
     return commands.check(predicate)
 
-## Code Here ----------------------------------------------------------
+## CHARACTER PROFILES ----------------------------------------------------------
 @bot.group(invoke_without_command=True,aliases=["char"])
 async def character(ctx, name: str):
     nameCheck = await db.fetchval("SELECT nickname FROM characters WHERE nickname = $1;",name)
@@ -206,6 +206,7 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
                     await db.execute(sqlText,newValue,nickname)
                     await ctx.send("Character " + nickname + " has been updated.")
 
+## CHARACTER SHEETS -------------------------------------------------------------------------
 @bot.group(invoke_without_command=True)
 async def sheet(ctx, name: str):
     nameCheck = await db.fetchval("SELECT nickname FROM characters WHERE nickname = $1;",name)
@@ -398,6 +399,58 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
                     
                     await ctx.send("Character " + nickname + " has been updated.")
 
+## DICE COMMANDS -------------------------------------------------------
+@bot.command(aliases=["r","d","dice"])
+async def roll(ctx, dice: str, *, mod: typing.Optional[str]):
+    try: 
+        numDice, sides = map(int, dice.split('d'))
+    except Exception:
+        await ctx.send("Sorry, please rewrite your command as **mi!roll #d#**!")
+        return
+        
+    if mod is not None:
+        mod = int(mod.replace(" ",""))
+
+    user = ctx.message.author
+    userMention = user.mention
+
+    resultTotal = 0
+    resultText = ""
+
+    for r in range(numDice):
+        tempResult = random.randint(1,sides)
+        resultTotal = resultTotal + tempResult
+        if r == 0:
+            resultText = resultText + str(tempResult)
+        else:
+            resultText = resultText + " + " + str(tempResult)
+            
+        if mod is not None:
+            resultTotal += mod
+            
+    if mod is not None:
+        if mod >= 0:
+            modText = " + "
+        else:
+            mod *= -1
+            modText = " - "
+            
+    if numDice == 1:
+        resultText = ""
+        if mod is not None:
+            resultText = " (" + str(tempResult) + modText + str(mod) + ")"
+    else:
+        resultText = " (" + resultText + ")"
+        if mod is not None:
+            if mod >= 0:
+                modText = " + "
+            else:
+                mod *= -1
+                modText = " - "
+            modAmount = mod * numDice
+            resultText += modText + str(modAmount)
+
+    await ctx.send(userMention + " You rolled " + dice + " for a total of " + str(resultTotal) + resultText)
 
 ## DEV COMMANDS --------------------------------------------------------
 @bot.group()
