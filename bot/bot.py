@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-# import random
+import random
 import typing
 import os
 import asyncio
