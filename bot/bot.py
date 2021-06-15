@@ -454,11 +454,14 @@ async def roll(ctx, dice: str, *, mod: typing.Optional[str]):
     await ctx.send(userMention + " You rolled " + dice + " for a total of " + str(resultTotal) + resultText)
     
 @bot.command()
-@is_admin()
 async def plant(ctx):
-    plantChoice = random.choice(plantList)
+    user = ctx.message.author.id
+    if user not in [devID, adminID]:
+        await ctx.send("Only the admin can use this command.")
+    else:
+        plantChoice = random.choice(plantList)
     
-    await ctx.send("Your plant is " + plantChoice)
+        await ctx.send("Your plant is " + plantChoice)
 
 ## DEV COMMANDS --------------------------------------------------------
 @bot.group()
