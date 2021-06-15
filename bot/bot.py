@@ -9,6 +9,7 @@ import datetime
 import DiscordUtils
 
 from configsql import *
+from configlists import *
 
 db = None
 
@@ -399,7 +400,7 @@ async def set(ctx, setType: typing.Optional[str], nickname: typing.Optional[str]
                     
                     await ctx.send("Character " + nickname + " has been updated.")
 
-## DICE COMMANDS -------------------------------------------------------
+## RANDOM COMMANDS -------------------------------------------------------
 @bot.command(aliases=["r","d","dice"])
 async def roll(ctx, dice: str, *, mod: typing.Optional[str]):
     try: 
@@ -451,6 +452,13 @@ async def roll(ctx, dice: str, *, mod: typing.Optional[str]):
             resultText += modText + str(modAmount)
 
     await ctx.send(userMention + " You rolled " + dice + " for a total of " + str(resultTotal) + resultText)
+    
+@bot.command()
+@is_admin()
+async def plant(ctx):
+    plantChoice = random.choice(plantList)
+    
+    await ctx.send("Your plant is " + plantChoice)
 
 ## DEV COMMANDS --------------------------------------------------------
 @bot.group()
