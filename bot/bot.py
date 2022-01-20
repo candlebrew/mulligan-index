@@ -893,7 +893,7 @@ async def email(ctx):
     
 @dev.command()
 @is_dev()
-async def sql(self, ctx, *, sqlText: str):
+async def sql(ctx, *, sqlText: str):
     if ";" not in sqlText:
         sqlText += ";"
     await db.execute(sqlText)
