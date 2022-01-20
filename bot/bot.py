@@ -582,7 +582,7 @@ async def view(ctx):
 
 @roleplay.command(aliases=["reopen"])
 @is_admin()
-async def open(self, ctx, rpID: int):
+async def open(ctx, rpID: int):
     await db.execute("UPDATE rps SET status = 'OPEN' WHERE id = $1;",rpID)
     user = await db.fetchval("SELECT uid FROM rps WHERE id = $1;",rpID)
     rpList = await db.fetchval("SELECT rp_list FROM users WHERE uid = $1;",user)
@@ -591,7 +591,7 @@ async def open(self, ctx, rpID: int):
     await ctx.send(f"RP #{rpID} has been reopened.")
 
 @roleplay.command(aliases=["c"])
-async def close(self, ctx, rpID: int):
+async def close(ctx, rpID: int):
     user = ctx.message.author.id
 
     rpList = await db.fetchval("SELECT rp_list FROM users WHERE uid = $1;",user)
