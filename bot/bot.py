@@ -658,7 +658,7 @@ async def header(ctx, *, newHeader: typing.Optional[str]):
 
     await ctx.send("Your tracker header has been updated.\n" + oldHeader + " → " + newHeader)
 
-@commands.group(invoke_without_command=True, aliases=["plan","pl"])
+@bot.group(invoke_without_command=True, aliases=["plan","pl"])
 async def planner(ctx):
     user = ctx.message.author.id
     emptyList = []
